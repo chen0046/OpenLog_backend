@@ -23,9 +23,6 @@ public class UserRepository {
     }
 
 
-    public int deleteAll() {
-        return jdbcTemplate.update("DELETE from User");
-    }
 
 
   /*  public int update(Tutorial tutorial) {

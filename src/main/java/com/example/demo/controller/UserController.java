@@ -26,13 +26,13 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/deleteusers")
+    @DeleteMapping("/deleteUsers")
     public ResponseEntity<String> deleteAllUser() {
         try {
             int numRows = userRepository.deleteAll();
             return new ResponseEntity<>("Deleted " + numRows + " openlog(s) successfully.", HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Cannot delete tutorials.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Cannot delete users.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
