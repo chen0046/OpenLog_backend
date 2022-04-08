@@ -17,7 +17,7 @@ public class LogValueController {
     @PostMapping("/addValue")
     public ResponseEntity<String> createValue(@RequestBody LogValue logvalue) {
         try {
-            logValueRepository.save(new LogValue(logvalue.getBlodsukker(),logvalue.getKulhydrat(),logvalue.getInsulin()));
+            logValueRepository.save(new LogValue(logvalue.getBlodsukker(),logvalue.getKulhydrat(),logvalue.getInsulin(),logvalue.getUserID()));
             return new ResponseEntity<>("LogValue was created successfully.", HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -32,5 +32,19 @@ public class LogValueController {
             return new ResponseEntity<>("Cannot delete logValues", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @DeleteMapping("/deleteByID/{userID}")
+    public ResponseEntity<String> deleteByID(@PathVariable("userID") int userID){
+        try {
+            int result = logValueRepository.deleteById(userID);
+            if (result == 0) {
+                return new ResponseEntity<>("Cannot find UserIDs with id=" + userID, HttpStatus.OK);
+            }
+            return new ResponseEntity<>("LogValues with userID: " + userID +  " was deleted successfully.", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Cannot delete userID.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
 
 }

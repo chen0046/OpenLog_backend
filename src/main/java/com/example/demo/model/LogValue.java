@@ -8,10 +8,11 @@ public class LogValue {
     private String timestamp;
     private int userID;
 
-    public LogValue(double blodSukker, double kulhydrat, double insulin){
+    public LogValue(double blodSukker, double kulhydrat, double insulin, int userID){
         this.blodsukker = blodSukker;
         this.kulhydrat = kulhydrat;
         this.insulin = insulin;
+        this.userID = userID;
 
     }
 
