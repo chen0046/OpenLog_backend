@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import com.example.demo.model.LogValue;
 import com.example.demo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,6 +15,13 @@ public class UserRepository {
         return jdbcTemplate.update("INSERT INTO openlog.user (UserName,Email,`Password`) VALUES(?,?,?)",
                 new Object[]{user.getUserName(), user.getEmail(), user.getPassword()});
     }
+    public int deleteAll() {
+        return jdbcTemplate.update("DELETE  from User");
+    }
+    public int deleteById(User user) {
+        return jdbcTemplate.update("DELETE FROM openlog.user WHERE UserID =?", user);
+    }
+
 
   /*  public int update(Tutorial tutorial) {
         return jdbcTemplate.update("UPDATE tutorials SET title=?, description=?, published=? WHERE id=?",
