@@ -15,6 +15,11 @@ public class UserRepository {
                 new Object[]{user.getUserName(), user.getEmail(), user.getPassword()});
     }
 
+    public int deleteAll() {
+        return jdbcTemplate.update("DELETE from User");
+    }
+
+
   /*  public int update(Tutorial tutorial) {
         return jdbcTemplate.update("UPDATE tutorials SET title=?, description=?, published=? WHERE id=?",
                 new Object[] { tutorial.getTitle(), tutorial.getDescription(), tutorial.isPublished(), tutorial.getId() });

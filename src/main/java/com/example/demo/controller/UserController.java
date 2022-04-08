@@ -25,4 +25,42 @@ public class UserController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @DeleteMapping("/deleteUsers")
+    public ResponseEntity<String> deleteAllUser() {
+        try {
+            int numRows = userRepository.deleteAll();
+            return new ResponseEntity<>("Deleted " + numRows + " openlog(s) successfully.", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Cannot delete useres.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+
 }
+  /*
+    @DeleteMapping("/tutorials/{id}")
+  public ResponseEntity<String> deleteTutorial(@PathVariable("id") long id) {
+    try {
+      int result = tutorialRepository.deleteById(id);
+      if (result == 0) {
+        return new ResponseEntity<>("Cannot find Tutorial with id=" + id, HttpStatus.OK);
+      }
+      return new ResponseEntity<>("Tutorial was deleted successfully.", HttpStatus.OK);
+    } catch (Exception e) {
+      return new ResponseEntity<>("Cannot delete tutorial.", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  @DeleteMapping("/tutorials")
+    public ResponseEntity<String> deleteAllTutorials() {
+        try {
+            int numRows = tutorialRepository.deleteAll();
+            return new ResponseEntity<>("Deleted " + numRows + " Tutorial(s) successfully.", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Cannot delete tutorials.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    */
