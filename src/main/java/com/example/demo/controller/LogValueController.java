@@ -4,10 +4,7 @@ import com.example.demo.repository.LogValueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
@@ -26,4 +23,14 @@ public class LogValueController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @DeleteMapping("/DeleteAllLogValue")
+    public ResponseEntity<String> deleteAllTutorials() {
+        try {
+            int numRows = logValueRepository.deleteAll();
+            return new ResponseEntity<>("Deleted " + numRows + " LogValues successfully.", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Cannot delete logvalues.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

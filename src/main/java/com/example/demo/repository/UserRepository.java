@@ -32,6 +32,7 @@ public class UserRepository {
     public int deleteById(Long id) {
         return jdbcTemplate.update("DELETE FROM tutorials WHERE id=?", id);
     }
+
     public List<Tutorial> findAll() {
         return jdbcTemplate.query("SELECT * from tutorials", BeanPropertyRowMapper.newInstance(Tutorial.class));
     }
