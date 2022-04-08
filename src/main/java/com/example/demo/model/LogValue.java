@@ -8,6 +8,13 @@ public class LogValue {
     private String timestamp;
     private int userID;
 
+    public LogValue(double blodSukker, double kulhydrat, double insulin){
+        this.blodsukker = blodSukker;
+        this.kulhydrat = kulhydrat;
+        this.insulin = insulin;
+
+    }
+
     public int getLogValID() {
         return logValID;
     }

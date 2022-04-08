@@ -17,7 +17,7 @@ public class UserController {
     UserRepository userRepository;
 
     @PostMapping("/adduser")
-    public ResponseEntity<String> createTutorial(@RequestBody User user) {
+    public ResponseEntity<String> createUser(@RequestBody User user) {
         try {
             userRepository.save(new User(user.getUserName(), user.getEmail(), user.getPassword()));
             return new ResponseEntity<>("User was created successfully.", HttpStatus.CREATED);
