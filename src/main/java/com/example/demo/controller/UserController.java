@@ -35,7 +35,18 @@ public class UserController {
             return new ResponseEntity<>("Cannot delete users.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @DeleteMapping("/delUser/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable("id")  int userID) {
+        try {
+            int result = userRepository.deleteById(userID);
+            if (result == 0) {
+                return new ResponseEntity<>("Cannot find user with id=" + userID, HttpStatus.OK);
+            }
+            return new ResponseEntity<>("user was deleted successfully.", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Cannot delete user.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 
 }

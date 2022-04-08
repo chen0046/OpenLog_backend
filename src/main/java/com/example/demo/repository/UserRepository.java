@@ -16,10 +16,10 @@ public class UserRepository {
                 new Object[]{user.getUserName(), user.getEmail(), user.getPassword()});
     }
     public int deleteAll() {
-        return jdbcTemplate.update("DELETE  from User");
+        return jdbcTemplate.update("DELETE from User");
     }
-    public int deleteById(User user) {
-        return jdbcTemplate.update("DELETE FROM openlog.user WHERE UserID =?", user);
+    public int deleteById(int user) {
+        return jdbcTemplate.update("DELETE FROM User WHERE UserID =?", user);
     }
 
 
