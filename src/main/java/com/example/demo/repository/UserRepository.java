@@ -23,6 +23,11 @@ public class UserRepository {
     }
 
 
+    public int deleteAll() {
+        return jdbcTemplate.update("DELETE from User");
+    }
+
+
   /*  public int update(Tutorial tutorial) {
         return jdbcTemplate.update("UPDATE tutorials SET title=?, description=?, published=? WHERE id=?",
                 new Object[] { tutorial.getTitle(), tutorial.getDescription(), tutorial.isPublished(), tutorial.getId() });
@@ -40,6 +45,7 @@ public class UserRepository {
     public int deleteById(Long id) {
         return jdbcTemplate.update("DELETE FROM tutorials WHERE id=?", id);
     }
+
     public List<Tutorial> findAll() {
         return jdbcTemplate.query("SELECT * from tutorials", BeanPropertyRowMapper.newInstance(Tutorial.class));
     }

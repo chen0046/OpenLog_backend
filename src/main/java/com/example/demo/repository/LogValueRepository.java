@@ -15,4 +15,7 @@ public class LogValueRepository {
         return jdbcTemplate.update("INSERT INTO openlog.logvalue (Kulhydrat, Insulin, Blodsukker) VALUES(?,?,?)",
                 new Object[]{logValue.getKulhydrat(),logValue.getBlodsukker(),logValue.getInsulin()});
     }
+    public int deleteAll() {
+        return jdbcTemplate.update("DELETE from Logvalue");
+    }
 }
