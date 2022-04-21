@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 import com.example.demo.model.LogValue;
 import com.example.demo.repository.LogValueRepository;
+import org.apache.juli.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,6 +46,15 @@ public class LogValueController {
         }
 
     }
+    @GetMapping("logvalue/{id}")
+    public ResponseEntity<LogValue> getTutorialById(@PathVariable("id") long id) {
+        LogValue logValue = logValueRepository.findByID(id);
+        if (logValue != null){
+            return new ResponseEntity<>(logValue,HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
 
+        }
 
 }
