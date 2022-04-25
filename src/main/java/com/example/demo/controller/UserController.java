@@ -3,13 +3,19 @@ package com.example.demo.controller;
 
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
@@ -19,10 +25,20 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
+    @PostMapping("/login")
+    public User login(@RequestParam("userName") String userName, @RequestParam("password") String pwd) {
+        String token = getJWTToken(userName);
+        User user = new User();
+        user.setUserName(userName);
+        user.setToken(token);
+        return user;
+        // check if the username and the password is the same in the database then return the token.
+    }
+
     @PostMapping("/adduser")
     public ResponseEntity<String> createUser(@RequestBody User user) {
         try {
-            userRepository.save(new User(user.getUserName(), user.getEmail(), user.getPassword()));
+            userRepository.save(new User(user.getUserName(), user.getEmail(), user.getPassword(),getJWTToken(user.getUserName())));
             return new ResponseEntity<>("User was created successfully.", HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -67,7 +83,17 @@ public class UserController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-*/
+    password: 123456 hash encryption -> 4236754
+                4236754 -/-> 123456
+
+      token: 123456   key:adsjkhqwoeufhkjshadoiusqwhejksd
+             encrpyted msg:82378412
+             server: 82378412
+             key:dsjkhqwoeufhkjshadoiusqwhejksd
+             decrypt
+             123456
+
+               */
     @GetMapping("/findUser/{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") int userID) {
         User user = userRepository.findById(userID);
@@ -119,7 +145,26 @@ public class UserController {
     }
 
 */
+    private String getJWTToken(String username) {
+        String secretKey = "mySecret";
+        List<GrantedAuthority> grantedAuthorities = AuthorityUtils
+                .commaSeparatedStringToAuthorityList("ROLE_USER");
 
+        String token = Jwts
+                .builder()
+                .setId("softtekJWT")
+                .setSubject(username)
+                .claim("authorities",
+                        grantedAuthorities.stream()
+                                .map(GrantedAuthority::getAuthority)
+                                .collect(Collectors.toList()))
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 600000))
+                .signWith(SignatureAlgorithm.HS512,
+                        secretKey.getBytes()).compact();
+
+        return "Bearer " + token;
+    }
 }
   /*
     @DeleteMapping("/tutorials/{id}")
