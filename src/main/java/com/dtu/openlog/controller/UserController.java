@@ -1,7 +1,9 @@
 package com.dtu.openlog.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.dtu.openlog.repository.UserRepository;
@@ -79,16 +81,6 @@ public class UserController {
             return new ResponseEntity<>("Cannot find Tutorial with id=" + id, HttpStatus.NOT_FOUND);
         }
     }
-/*	@PostMapping("user")
-	public User login(@RequestParam("user") String username, @RequestParam("password") String pwd) {
-		
-		String token = getJWTToken(username);
-		User user = new User();
-		user.setUser(username);
-		user.setToken(token);		
-		return user;
-		
-	} */
 
     private String getJWTToken(String username) {
         String secretKey = "mySecretKey";
@@ -110,4 +102,30 @@ public class UserController {
 
         return "Bearer " + token;
     }
+
+    @GetMapping("/getAll")
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
+}
+    @GetMapping("/user/{userID}")
+    public ResponseEntity<User> findUserid(@PathVariable(value = "userID") long id) {
+        Optional<User> user = Optional.ofNullable(userRepository.findById(id));
+        if (user != null) {
+            return new ResponseEntity(user, HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+    }
+
+/*
+    @GetMapping("/user/{userID}")
+    public ResponseEntity<User> getUserById(@PathVariable("userID") int userID) {
+        User user = userRepository.findById(userID);
+        if (user != null) {
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+*/
 }

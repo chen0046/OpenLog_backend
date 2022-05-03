@@ -1,10 +1,13 @@
 package com.dtu.openlog.controller;
 import com.dtu.openlog.dto.LogValue;
+import com.dtu.openlog.dto.User;
 import com.dtu.openlog.repository.LogValueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
@@ -45,15 +48,5 @@ public class LogValueController {
         }
 
     }
-    @GetMapping("logvalue/{id}")
-    public ResponseEntity<LogValue> getTutorialById(@PathVariable("id") long id) {
-        LogValue logValue = logValueRepository.findByID(id);
-        if (logValue != null){
-            return new ResponseEntity<>(logValue,HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-        }
 
 }

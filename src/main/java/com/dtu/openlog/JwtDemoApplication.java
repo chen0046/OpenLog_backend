@@ -27,7 +27,7 @@ public class JwtDemoApplication {
 				.addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
 				.authorizeRequests()
 				.antMatchers(HttpMethod.POST, "/login").permitAll()
-				.anyRequest().authenticated();
+					.anyRequest().authenticated();
 		}
 	}
 
