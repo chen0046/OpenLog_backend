@@ -29,13 +29,6 @@ public class LogValueRepository {
         return jdbcTemplate.update("DELETE FROM openlog.logvalue WHERE UserID =?", logValue);
     }
 
-    public LogValue findByID(long id) {
-        try {
-            LogValue logValue = jdbcTemplate.queryForObject("SELECT * FROM openlog.logvalue WHERE LogValueID = ?", BeanPropertyRowMapper.newInstance(LogValue.class), id);
-            return logValue;
-        } catch (IncorrectResultSizeDataAccessException e) {
-            return null;
-        }
-    }
+
 
 }

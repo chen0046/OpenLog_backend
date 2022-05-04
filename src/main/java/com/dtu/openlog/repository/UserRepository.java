@@ -28,16 +28,6 @@ public class UserRepository {
         return jdbcTemplate.update("DELETE FROM User WHERE UserID =?", user);
     }
 
-    public User findById(int userID) {
-        try {
-            User user = jdbcTemplate.queryForObject("SELECT * from openlog.user WHERE UserID=?",
-                    BeanPropertyRowMapper.newInstance(User.class), userID);
-            return user;
-        } catch (IncorrectResultSizeDataAccessException e) {
-            return null;
-        }
-    }
-
     public User findByUserNameAndPwd(String userName, String pwd) {
         try {
             User user = jdbcTemplate.queryForObject("SELECT * from openlog.user WHERE UserName=? AND Password = ?",
@@ -55,11 +45,6 @@ public class UserRepository {
     public List<User> findAll() {
         return jdbcTemplate.query("SELECT * from openlog.user", BeanPropertyRowMapper.newInstance(User.class));
     }
-/*
-    public List<User> findById(){
-        return  jdbcTemplate.query("SELECT * from openlog.user where UserID = ?",BeanPropertyRowMapper.newInstance(User.class));
-    }
-*/
 
     public User findById(long userID) {
         try {

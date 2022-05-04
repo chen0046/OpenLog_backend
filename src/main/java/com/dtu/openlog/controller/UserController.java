@@ -49,7 +49,7 @@ public class UserController {
     public ResponseEntity<String> deleteAllUser() {
         try {
             int numRows = userRepository.deleteAll();
-            return new ResponseEntity<>("Deleted " + numRows + " openlog(s) successfully.", HttpStatus.OK);
+            return new ResponseEntity<>("Deleted " + numRows + " user(s) successfully.", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Cannot delete users.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -76,9 +76,9 @@ public class UserController {
             temp.setPassword(user.getPassword());
             temp.setEmail(user.getEmail());
             userRepository.update(temp);
-            return new ResponseEntity<>("Tutorial was updated successfully.", HttpStatus.OK);
+            return new ResponseEntity<>("User was updated successfully.", HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("Cannot find Tutorial with id=" + id, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Cannot find User with id=" + id, HttpStatus.NOT_FOUND);
         }
     }
 
@@ -117,15 +117,4 @@ public class UserController {
         }
     }
 
-/*
-    @GetMapping("/user/{userID}")
-    public ResponseEntity<User> getUserById(@PathVariable("userID") int userID) {
-        User user = userRepository.findById(userID);
-        if (user != null) {
-            return new ResponseEntity<>(user, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-*/
 }
