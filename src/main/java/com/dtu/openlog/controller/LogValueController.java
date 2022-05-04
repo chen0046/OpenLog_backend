@@ -20,6 +20,7 @@ public class LogValueController {
     @PostMapping("/addValue")
     public ResponseEntity<String> createValue(@RequestBody LogValue logvalue) {
         try {
+            System.out.println(logvalue);
             logValueRepository.save(new LogValue(logvalue.getBlodsukker(),logvalue.getKulhydrat(),logvalue.getInsulin(),logvalue.getUserID()));
             return new ResponseEntity<>("LogValue was created successfully.", HttpStatus.CREATED);
         } catch (Exception e) {

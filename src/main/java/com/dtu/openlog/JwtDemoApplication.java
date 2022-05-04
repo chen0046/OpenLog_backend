@@ -13,23 +13,23 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @SpringBootApplication
 public class JwtDemoApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(JwtDemoApplication.class, args);
-	}
-	
-	@EnableWebSecurity
-	@Configuration
-	class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    public static void main(String[] args) {
+        SpringApplication.run(JwtDemoApplication.class, args);
+    }
 
-		@Override
-		protected void configure(HttpSecurity http) throws Exception {
-			http.csrf().disable()
-				.addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
-				.authorizeRequests()
-				.antMatchers(HttpMethod.POST, "/login").permitAll()
-					.anyRequest().authenticated();
-		}
-	}
+    @EnableWebSecurity
+    @Configuration
+    class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+        @Override
+        protected void configure(HttpSecurity http) throws Exception {
+            http.csrf().disable()
+                    .addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
+                    .authorizeRequests()
+                    .antMatchers(HttpMethod.POST, "/login","/adduser").permitAll()
+                    .anyRequest().authenticated();
+        }
+    }
 
 }
 

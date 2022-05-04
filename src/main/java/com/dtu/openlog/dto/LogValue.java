@@ -8,7 +8,7 @@ public class LogValue {
     private String timestamp;
     private int userID;
 
-    public LogValue(double blodSukker, double kulhydrat, double insulin, int userID){
+    public LogValue(double blodSukker, double kulhydrat, double insulin, int userID) {
         this.blodsukker = blodSukker;
         this.kulhydrat = kulhydrat;
         this.insulin = insulin;
@@ -62,5 +62,17 @@ public class LogValue {
 
     public void setUserID(int userID) {
         this.userID = userID;
+    }
+
+    @Override
+    public String toString() {
+        return "LogValue{" +
+                "logValID=" + logValID +
+                ", kulhydrat=" + kulhydrat +
+                ", insulin=" + insulin +
+                ", blodsukker=" + blodsukker +
+                ", timestamp='" + timestamp + '\'' +
+                ", userID=" + userID +
+                '}';
     }
 }

@@ -16,8 +16,8 @@ public class UserRepository {
     private JdbcTemplate jdbcTemplate;
 
     public int save(User user) {
-        return jdbcTemplate.update("INSERT INTO openlog.user (UserName,Email,`Password`,Token) VALUES(?,?,?,?)",
-                new Object[]{user.getUserName(), user.getEmail(), user.getPassword(), user.getToken()});
+        return jdbcTemplate.update("INSERT INTO openlog.user (UserName,Email,`Password`) VALUES(?,?,?)",
+                new Object[]{user.getUserName(), user.getEmail(), user.getPassword()});
     }
 
     public int deleteAll() {

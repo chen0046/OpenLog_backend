@@ -38,9 +38,11 @@ public class UserController {
     @PostMapping("/adduser")
     public ResponseEntity<String> createUser(@RequestBody User user) {
         try {
+            System.out.println(user);
             userRepository.save(new User(user.getUserName(), user.getEmail(), user.getPassword(), getJWTToken(user.getUserName())));
             return new ResponseEntity<>("User was created successfully.", HttpStatus.CREATED);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

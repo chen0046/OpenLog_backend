@@ -17,8 +17,8 @@ public class LogValueRepository {
     private JdbcTemplate jdbcTemplate;
 
     public int save(LogValue logValue) {
-        return jdbcTemplate.update("INSERT INTO openlog.logvalue (Kulhydrat, Insulin, Blodsukker) VALUES(?,?,?)",
-                new Object[]{logValue.getKulhydrat(), logValue.getBlodsukker(), logValue.getInsulin()});
+        return jdbcTemplate.update("INSERT INTO openlog.logvalue (Kulhydrat, Insulin, Blodsukker, UserID) VALUES(?,?,?,?)",
+                new Object[]{logValue.getKulhydrat(), logValue.getBlodsukker(), logValue.getInsulin(), logValue.getUserID()});
     }
 
     public int deleteAll() {
@@ -28,7 +28,6 @@ public class LogValueRepository {
     public int deleteById(int logValue) {
         return jdbcTemplate.update("DELETE FROM openlog.logvalue WHERE UserID =?", logValue);
     }
-
 
 
 }
