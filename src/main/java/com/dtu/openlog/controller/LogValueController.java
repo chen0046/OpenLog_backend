@@ -28,7 +28,7 @@ public class LogValueController {
         }
     }
     @DeleteMapping("/deleteAllLogValue")
-    public ResponseEntity<String> deleteAllUser() {
+    public ResponseEntity<String> deleteAllLogValue() {
         try {
             int numRows = logValueRepository.deleteAll();
             return new ResponseEntity<>("Deleted " + numRows + " logValues successfully.", HttpStatus.OK);

@@ -22,7 +22,7 @@ public class LogValueRepository {
     }
 
     public int deleteAll() {
-        return jdbcTemplate.update("DELETE from Logvalue");
+        return jdbcTemplate.update("DELETE from openlog.logvalue");
     }
 
     public int deleteById(int logValue) {
